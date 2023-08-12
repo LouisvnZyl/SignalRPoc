@@ -26,6 +26,16 @@ namespace SignalRAppApi.Controllers
             return Ok();
         }
 
+        [HttpPost("SendTestGroup")]
+        public async Task<IActionResult> SendGroupMesage()
+        {
+            var messageIdentity = Guid.NewGuid().ToString();
+
+            await _timedMessageHub.Clients.Group("TestGroup").SendAsync("GetTestFeed", messageIdentity);
+
+            return Ok();
+        }
+
         [HttpPost]
         public async Task<IActionResult> SendGroupMesage()
         {
